@@ -1105,7 +1105,7 @@ case 'pulsa':
 }
 denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
 break
-case 'freefire':
+case 'freefireviaid':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
@@ -1200,7 +1200,7 @@ case 'freefire':
 }
 denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
 break
-case 'mobilelegends':
+case 'mobilelegendsfast':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
