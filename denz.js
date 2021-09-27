@@ -3697,28 +3697,52 @@ break
 							reply(mess.error.api)
 						}
 						break
-			case 'play':
-					if (args.length === 0) return reply(`Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`)
-		            var srch = args.join('')
-		    		aramas = await yts(srch);
-		    		aramat = aramas.all 
-		   			var mulaikah = aramat[0].url							
-		                  try {
-		                    yta(mulaikah)
-		                    .then((res) => {
-		                        const { dl_link, thumb, title, filesizeF, filesize } = res
-		                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-		                        .then(async (a) => {
-		                        if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
-		                        const captions = `🎧 *PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-		                       await sendMediaURL(from, thumb, captions)
-		                        sendMediaURL(from, dl_link).catch(() => reply('error'))
-		                        })                
-		                        })
-		                        } catch (err) {
-		                        reply(mess.error.api)
-		                        }
-		                   break  
+						case 'play': 
+						case 'playmp3':{
+							  if (args.length < 1) return reply(`Kirim perintah *${prefix}play judul*`)
+							  try {
+								  reply(mess.wait())
+								  let yut = await yts(q)
+								  yta(yut.videos[0].url)
+								  .then((res) => {
+									  const { dl_link, thumb, title, filesizeF, filesize } = res
+									  axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+									  .then((a) => {
+										  if (Number(filesize) >= 30000) return sendFileFromUrl(from, thumb, `*LAGU BERHASIL DIDAPATKAN*
+			  
+			  \`\`\`Title : ${title}\`\`\`
+			  \`\`\`Ext : MP3\`\`\`
+			  \`\`\`Filesize : ${filesizeF}\`\`\`
+			  \`\`\`ID : ${yut.videos[0].videoId}\`\`\`
+			  \`\`\`Upload : ${yut.videos[0].ago}\`\`\`
+			  \`\`\`Ditonton : ${yut.videos[0].views}\`\`\`
+			  \`\`\`Duration : ${yut.videos[0].timestamp}\`\`\`
+			  \`\`\`Link : ${a.data}\`\`\`
+			  
+			  _Untuk durasi lebih dari batas disajikan dalam bentuk link_`, Mek)
+									  const captionis = `*LAGU BERHASIL DIDAPATKAN*
+			  
+			  \`\`\`Title : ${title}\`\`\`
+			  \`\`\`Ext : MP3\`\`\`
+			  \`\`\`Size : ${filesizeF}\`\`\`
+			  \`\`\`ID : ${yut.videos[0].videoId}\`\`\`
+			  \`\`\`Upload : ${yut.videos[0].ago}\`\`\`
+			  \`\`\`Ditonton : ${yut.videos[0].views}\`\`\`
+			  \`\`\`Duration : ${yut.videos[0].timestamp}\`\`\`
+			  \`\`\`URL : ${yut.videos[0].url}\`\`\`
+			  
+			  _Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+										  sendFileFromUrl(from, thumb, captionis, Mek)
+										  sendFileFromUrl(from, dl_link, '', Mek)
+										  
+									  })
+								  })
+								  .catch((err) => reply(`${err}`))
+							  } catch (err) {
+								  console.log(color('Emror', 'red'), err)
+								  reply(mess.error.api)
+							  }
+						  }
                             case 'video':
                             if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
                             const playi = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
@@ -4095,7 +4119,7 @@ o = response.participants[0]
 let inv = (Object.values(o))
 if(inv[0].code == 409) return reply('Orang yang anda add sudah ada didalam Group!')
 else if(inv[0].code == 403){
-denz.sendMessage(from, `User private\n\nMengirim Undangan Group Ke @${q.split('@')[0]}`, MessageType.text, {quoted: nay, contextInfo: {mentionedJid: [orang]}})
+denz.sendMessage(from, `User private\n\nMengirim Undangan Group Ke @${q.split('@')[0]}`, MessageType.text, {quoted: Mek, contextInfo: {mentionedJid: [orang]}})
 denz.sendMessage(from, orang, inv[0].invite_code, inv[0].invite_code_exp, groupMetadata.subject , `Salah Satu Admin Mengundang Anda Masuk Ke Sini Silahkan Klik Bergabung Untuk Masuk`)
 }
 				break 
