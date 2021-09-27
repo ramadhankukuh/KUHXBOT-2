@@ -1043,22 +1043,30 @@ case 'topup':
  listMsg = {
  buttonText: 'PILIH KATEGORI',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih kategori game disini`,
+ description: `Hai kak @${stod.split('@')[0]}, Have a nice day  😇 Silahkan pilih kategori disini`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
  rows: [
                           {
-                              "title": "FreeFire",
+                              "title": "FreeFireViaID",
                               "rowId": ""
                            },
                            {
-                              "title": "MobileLegends",
+                              "title": "FreeFireViaLogin",
                               "rowId": ""
                            },
                            {
-                              "title": "Pulsa",
+                              "title": "MobileLegendsFast",
                               "rowId": ""
+							},
+							{
+							   "title": "MobileLegendsSlow",
+							   "rowId": ""
+							},
+							{
+							   "title": "Pulsa",
+							   "rowId": ""
 							}
                         ]
                      }],
@@ -1101,7 +1109,7 @@ case 'freefire':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal diamond disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal diamond disini.\nuntuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
