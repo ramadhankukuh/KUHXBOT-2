@@ -109,7 +109,7 @@ nopref = false
 
 // APIKEY
 HunterApi = settings.HunterApi
-ApiXteam = settings.ApiXteam
+apixteam = settings.ApiXteam
 zeksApikey = 'Y23v7DSrODuAeKeh7g0p3zpOEYB'
 ApiZeks = 'https://api.zeks.xyz'
 
