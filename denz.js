@@ -1109,7 +1109,7 @@ case 'freefireviaid':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal diamond disini.\nuntuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan Pilih Nominal Diamond Disini.\n\nUntuk Pembelian & Pembayaran Bisa Klik wa.me/12816245470 Karena Bot Ini Hanya Memberi List Harga Saja.\n\nFormat Topup FF\nID :\nNick\nBerapa Diamond :`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
@@ -1204,7 +1204,7 @@ case 'mobilelegendsfast':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal diamond disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan Pilih Nominal Diamond Disini.\n\nUntuk Pembelian & Pembayaran Bisa Klik wa.me/12816245470 Karena Bot Ini Hanya Memberi List Harga Saja.\n\nFormat Topup ML\nID :\nServer\nNick\nBerapa Diamond :\nPaket : Fast`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
@@ -1291,90 +1291,26 @@ case 'mobilelegendsfast':
 }
 denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
 break
-case 'cashml':
+case 'freefirevialogin':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal diamond disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan Pilih Nominal Diamond Disini.\n\nUntuk Pembelian & Pembayaran Bisa Klik wa.me/12816245470 Karena Bot Ini Hanya Memberi List Harga Saja.\n\nFormat Order Via Login\nLogin Via :\nEmail :\nPassword\nBerapa Diamond :\nAuthen :`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
  rows: [
                           {
-                              "title": "86 Diamond = 20.000",
+                              "title": "520 Diamond = 60.000",
                               "rowId": ""
                            },
                            {
-                              "title": "172 Diamond = 40.000",
+                              "title": "2.180 Diamond = 240.000",
                               "rowId": ""
                            },
                            {
-                              "title": "257 Diamond = 60.000",
+                              "title": "5.600 Diamond = 530.000",
                               "rowId": ""
-							},
-							{
-							   "title": "344 Diamond = 80.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "429 Diamond = 100.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "514 Diamond = 120.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "600 Diamond = 140.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "706 Diamond = 160.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "878 Diamond = 200.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "963 Diamond = 220.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "1.050 Diamond = 240.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "1.412 Diamond = 320.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "2.195 Diamond = 450.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "3.688 Diamond = 750.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "5.532 Diamond = 1.125.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "9.288 Diamond = 1.850.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Starlight Member = 130.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Twilight Pass = 130.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Starlight Member Plus = 285.000",
-							   "rowId": ""
 							}
                         ]
                      }],
@@ -1387,7 +1323,7 @@ case 'pulsaxl':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal pulsa disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan Pilih Nominal Pulsa Disini. Untuk Pembelian Bisa Klik wa.me/12816245470, Karena Bot Ini Hanya Memberi List Harga Saja.`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
@@ -1414,7 +1350,7 @@ case 'pulsathree':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal pulsa disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan Pilih Nominal Pulsa Disini. Untuk Pembelian Bisa Klik wa.me/12816245470, Karena Bot Ini Hanya Memberi List Harga Saja.`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
@@ -1441,7 +1377,7 @@ case 'pulsatelkomsel':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal pulsa disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan Pilih Nominal Pulsa Disini. Untuk Pembelian Bisa Klik wa.me/12816245470, Karena Bot Ini Hanya Memberi List Harga Saja.`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
