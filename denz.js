@@ -1043,7 +1043,7 @@ case 'topup':
  listMsg = {
  buttonText: 'PILIH KATEGORI',
  footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih kategori disini`,
+ description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih kategori game disini`,
  sections: [
                      {
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
@@ -1058,52 +1058,6 @@ case 'topup':
                            },
                            {
                               "title": "Pulsa",
-                              "rowId": ""
-							}
-                        ]
-                     }],
- listType: 1
-}
-denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
-break
-case 'freefire':
- listMsg = {
- buttonText: 'PILIH PEMBAYARAN',
- footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih pembayaran disini`,
- sections: [
-                     {
-                      "title": `${jmn} - ${week} ${weton} - ${calender}`,
- rows: [
-                          {
-                              "title": "SemuaPembayaranFF",
-                              "rowId": ""
-                           },
-                           {
-                              "title": "CashFF",
-                              "rowId": ""
-							}
-                        ]
-                     }],
- listType: 1
-}
-denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
-break
-case 'mobilelegends':
- listMsg = {
- buttonText: 'PILIH PEMBAYARAN',
- footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih pembayaran disini`,
- sections: [
-                     {
-                      "title": `${jmn} - ${week} ${weton} - ${calender}`,
- rows: [
-                          {
-                              "title": "SemuaPembayaranML",
-                              "rowId": ""
-                           },
-                           {
-                              "title": "CashML",
                               "rowId": ""
 							}
                         ]
@@ -1143,7 +1097,7 @@ case 'pulsa':
 }
 denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
 break
-case 'semuapembayaranff':
+case 'freefire':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
@@ -1153,23 +1107,23 @@ case 'semuapembayaranff':
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
  rows: [
                           {
-                              "title": "70 Diamond = 10.000",
+                              "title": "70 Diamond = 9.500",
                               "rowId": ""
                            },
                            {
-                              "title": "140 Diamond = 19.500",
+                              "title": "140 Diamond = 19.000",
                               "rowId": ""
                            },
                            {
-                              "title": "160 Diamond = 22.500",
+                              "title": "160 Diamond = 22.000",
                               "rowId": ""
 							},
 							{
-							   "title": "210 Diamond = 29.000",
+							   "title": "210 Diamond = 28.500",
 							   "rowId": ""
 							},
 							{
-							   "title": "280 Diamond = 39.000",
+							   "title": "280 Diamond = 38.000",
 							   "rowId": ""
 							},
 							{
@@ -1185,7 +1139,7 @@ case 'semuapembayaranff':
 							   "rowId": ""
 							},
 							{
-							   "title": "635 Diamond = 87.000",
+							   "title": "635 Diamond = 86.000",
 							   "rowId": ""
 							},
 							{
@@ -1193,7 +1147,7 @@ case 'semuapembayaranff':
 							   "rowId": ""
 							},
 							{
-							   "title": "860 Diamond = 115.000",
+							   "title": "860 Diamond = 114.000",
 							   "rowId": ""
 							},
 							{
@@ -1213,11 +1167,11 @@ case 'semuapembayaranff':
 							   "rowId": ""
 							},
 							{
-							   "title": "2.000 Diamond = 260.000",
+							   "title": "2.000 Diamond = 259.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "4.000 Diamond = 520.000",
+							   "title": "4.000 Diamond = 518.000",
 							   "rowId": ""
 							},
 							{
@@ -1238,7 +1192,7 @@ case 'semuapembayaranff':
 }
 denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
 break
-case 'cashff':
+case 'mobilelegends':
  listMsg = {
  buttonText: 'PILIH NOMINAL',
  footerText: '*_© KUHXBOT_*',
@@ -1248,174 +1202,79 @@ case 'cashff':
                       "title": `${jmn} - ${week} ${weton} - ${calender}`,
  rows: [
                           {
-                              "title": "70 Diamond = 10.000",
+                              "title": "86 Diamond = 21.000",
                               "rowId": ""
                            },
                            {
-                              "title": "140 Diamond = 20.000",
+                              "title": "172 Diamond = 42.000",
                               "rowId": ""
                            },
                            {
-                              "title": "160 Diamond = 23.000",
+                              "title": "257 Diamond = 63.000",
                               "rowId": ""
 							},
 							{
-							   "title": "210 Diamond = 30.000",
+							   "title": "344 Diamond = 84.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "280 Diamond = 40.000",
+							   "title": "429 Diamond = 105.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "355 Diamond = 50.000",
+							   "title": "514 Diamond = 125.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "425 Diamond = 60.000",
+							   "title": "600 Diamond = 146.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "500 Diamond = 70.000",
+							   "title": "706 Diamond = 164.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "635 Diamond = 90.000",
+							   "title": "878 Diamond = 206.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "720 Diamond = 100.000",
+							   "title": "963 Diamond = 227.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "860 Diamond = 120.000",
+							   "title": "1.050 Diamond = 248.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "930 Diamond = 130.000",
+							   "title": "1.412 Diamond = 328.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "1.000 Diamond = 140.000",
+							   "title": "2.195 Diamond = 480.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "1.215 Diamond = 170.000",
+							   "title": "3.688 Diamond = 840.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "1.450 Diamond = 200.000",
+							   "title": "5.532 Diamond = 1.260.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "2.000 Diamond = 270.000",
+							   "title": "9.288 Diamond = 2.050.000",
 							   "rowId": ""
 							},
 							{
-							   "title": "4.000 Diamond = 540.000",
+							   "title": "Starlight Member = 138.500",
 							   "rowId": ""
 							},
 							{
-							   "title": "7.290 Diamond = 1.000.000",
+							   "title": "Twilight Pass = 138.500",
 							   "rowId": ""
 							},
 							{
-							   "title": "Member Mingguan = 30.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Member Bulanan = 120.000",
-							   "rowId": ""
-							}
-                        ]
-                     }],
- listType: 1
-}
-denz.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [stod]},quoted:ftrol})
-break
-case 'semuapembayaranml':
- listMsg = {
- buttonText: 'PILIH NOMINAL',
- footerText: '*_© KUHXBOT_*',
- description: `Hai kak @${stod.split('@')[0]}, Silahkan pilih nominal diamond disini. untuk pembelian bisa klik wa.me/12816245470, karena bot ini hanya memberi list harga saja.`,
- sections: [
-                     {
-                      "title": `${jmn} - ${week} ${weton} - ${calender}`,
- rows: [
-                          {
-                              "title": "86 Diamond = 19.000",
-                              "rowId": ""
-                           },
-                           {
-                              "title": "172 Diamond = 38.000",
-                              "rowId": ""
-                           },
-                           {
-                              "title": "257 Diamond = 58.000",
-                              "rowId": ""
-							},
-							{
-							   "title": "344 Diamond = 76.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "429 Diamond = 96.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "514 Diamond = 115.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "600 Diamond = 134.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "706 Diamond = 150.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "878 Diamond = 188.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "963 Diamond = 208.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "1.050 Diamond = 226.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "1.412 Diamond = 300.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "2.195 Diamond = 442.500",
-							   "rowId": ""
-							},
-							{
-							   "title": "3.688 Diamond = 737.500",
-							   "rowId": ""
-							},
-							{
-							   "title": "5.532 Diamond = 1.106.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "9.288 Diamond = 1.830.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Starlight Member = 125.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Twilight Pass = 125.000",
-							   "rowId": ""
-							},
-							{
-							   "title": "Starlight Member Plus = 282.000",
+							   "title": "Starlight Member Plus = 315.000",
 							   "rowId": ""
 							}
                         ]
