@@ -3693,26 +3693,19 @@ break
 						}
 						break
 			case 'play':
-					if (args.length === 0) return reply(`Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`)
-		            var srch = args.join('')
-		    		aramas = await yts(srch);
-		    		aramat = aramas.all 
-		   			var mulaikah = aramat[0].url							
-		                  try {
-		                    yta(mulaikah)
-		                    .then((res) => {
-		                        const { dl_link, thumb, title, filesizeF, filesize } = res
-		                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-		                        .then(async (a) => {
-		                        if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
-		                        const captions = `🎧 *PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-		                       await sendMediaURL(from, thumb, captions)
-		                        sendMediaURL(from, dl_link).catch(() => reply('error'))
-		                        })                
-		                        })
-		                        } catch (err) {
-		                        reply(mess.error.api)
-		                        }
+                if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}play [ link ]*\nContoh : ${data.prefix}play alone`)
+                data.reply(mess.wait)
+                res = await axios.get(`${ApiZeks.apiUrl}/api/ytplaymp3/2?apikey=${ApiZeks}&q=${data.body}`)
+                if(res.data.status == false) data.reply(res.data.message)
+                ytm = res.data.result
+                teks = `*Data berhasil didapatkan!*\n\n*Judul* : ${ytm.title}\n*Ukuran* : ${ytm.size}\n*Kualitas* : ${ytm.quality}\n*Ext* : ${ytm.ext}\n*Source* : ${ytm.source}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+                if(Number(ytm.size.split(' MB')[0]) >= 50.00) return Client.sendFileFromUrl(data.from, `${ytm.thumb}`, 'thumb.jpg', `*Data Berhasil Didapatkan!*\n\n*Title* : ${ytm.title}\n*Ukuran* : ${ytm.size}\n*Kualitas* : ${ytm.quality}\n*Ext* : mp3\n*Source* : ${ytm.source}\n*Link* : ${ytm.link}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link_`, data.message)
+                Client.sendFileFromUrl(data.from, ytm.thumb, 'thumb.jpg', teks, data.message)
+                Client.sendFileFromUrl(data.from, ytm.link, `${ytm.title} - Download.mp3`, ``, data.message)
+            } catch {
+                data.reply('Ups maaf server sedang error atau mungkin apikey invalid')
+            }
+        })
 		                   break  
                             case 'video':
                             if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
@@ -3747,7 +3740,7 @@ break
                   if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Wrong format!')
                     const getbuff = data.isQuotedVideo || data.isQuotedImage ? JSON.parse(JSON.stringify(data.message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : data.message
                     const dlfile = await client.downloadMediaMessage(getbuff)
-                    if(type == 'videoMessage' || isQuotedVideo) Client.sendMp4AsSticker(from, dlfile.toString('base64'), message, { pack: `${configs.pack}`, author: `${settings.author}` })
+                    if(type == 'videoMessage' || isQuotedVideo) Client.sendMp4AsSticker(from, dlfile.toString('base64'), message, { pack: `${settings.pack}`, author: `${settings.author}` })
                     else Client.sendImageAsSticker(from, dlfile.toString('base64'), message, { pack: `${settings.pack}`, author: `${settings.author}` })
                     break
 					case 'stickerwm':
