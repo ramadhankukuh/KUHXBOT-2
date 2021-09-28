@@ -3693,19 +3693,45 @@ break
 						}
 						break
 			case 'play':
-                if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}play [ link ]*\nContoh : ${data.prefix}play alone`)
-                data.reply(mess.wait)
-                res = await axios.get(`${ApiZeks.apiUrl}/api/ytplaymp3/2?apikey=${ApiZeks}&q=${data.body}`)
-                if(res.data.status == false) data.reply(res.data.message)
-                ytm = res.data.result
-                teks = `*Data berhasil didapatkan!*\n\n*Judul* : ${ytm.title}\n*Ukuran* : ${ytm.size}\n*Kualitas* : ${ytm.quality}\n*Ext* : ${ytm.ext}\n*Source* : ${ytm.source}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-                if(Number(ytm.size.split(' MB')[0]) >= 50.00) return Client.sendFileFromUrl(data.from, `${ytm.thumb}`, 'thumb.jpg', `*Data Berhasil Didapatkan!*\n\n*Title* : ${ytm.title}\n*Ukuran* : ${ytm.size}\n*Kualitas* : ${ytm.quality}\n*Ext* : mp3\n*Source* : ${ytm.source}\n*Link* : ${ytm.link}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link_`, data.message)
-                Client.sendFileFromUrl(data.from, ytm.thumb, 'thumb.jpg', teks, data.message)
-                Client.sendFileFromUrl(data.from, ytm.link, `${ytm.title} - Download.mp3`, ``, data.message)
-            } catch {
-                data.reply('Ups maaf server sedang error atau mungkin apikey invalid')
-            }
-        })
+                					if (args.length === 0) return reply(`Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`)
+
+		            var srch = args.join('')
+
+		    		aramas = await yts(srch);
+
+		    		aramat = aramas.all 
+
+		   			var mulaikah = aramat[0].url							
+
+		                  try {
+
+		                    yta(mulaikah)
+
+		                    .then((res) => {
+
+		                        const { dl_link, thumb, title, filesizeF, filesize } = res
+
+		                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+
+		                        .then(async (a) => {
+
+		                        if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
+
+		                        const captions = `🎧 *PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
+
+		                       await sendMediaURL(from, thumb, captions)
+
+		                        sendMediaURL(from, dl_link).catch(() => reply('error'))
+
+		                        })                
+
+		                        })
+
+		                        } catch (err) {
+
+		                        reply(mess.error.api)
+
+		                        }
 		                   break  
                             case 'video':
                             if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
@@ -3737,12 +3763,117 @@ break
 				case 'sticker':
 					case 'stiker':
 					case 's':
-                  if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Wrong format!')
-                    const getbuff = data.isQuotedVideo || data.isQuotedImage ? JSON.parse(JSON.stringify(data.message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : data.message
-                    const dlfile = await client.downloadMediaMessage(getbuff)
-                    if(type == 'videoMessage' || isQuotedVideo) Client.sendMp4AsSticker(from, dlfile.toString('base64'), message, { pack: `${settings.pack}`, author: `${settings.author}` })
-                    else Client.sendImageAsSticker(from, dlfile.toString('base64'), message, { pack: `${settings.pack}`, author: `${settings.author}` })
-                    break
+						if (isMedia && !mek.message.videoMessage || isQuotedImage) {
+
+							const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+
+							const media = await denz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
+
+							await ffmpeg(`${media}`)
+
+									.input(media)
+
+									.on('start', function (cmd) {
+
+										console.log(`Started : ${cmd}`)
+
+									})
+
+									.on('error', function (err) {
+
+										console.log(`Error : ${err}`)
+
+										fs.unlinkSync(media)
+
+										reply(mess.error.api)
+
+									})
+
+									.on('end', function () {
+
+										console.log('Finish')
+
+										exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
+
+											if (error) return reply(mess.error.api)
+
+											denz.sendMessage(from, fs.readFileSync(`./sticker/${sender}.webp`), sticker, {quoted: mek})
+
+											fs.unlinkSync(media)	
+
+											fs.unlinkSync(`./sticker/${sender}.webp`)	
+
+										})
+
+									})
+
+									.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+
+									.toFormat('webp')
+
+									.save(`./sticker/${sender}.webp`)
+
+						} else if ((isMedia && mek.message.videoMessage.fileLength < 10000000 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 10000000)) {
+
+							const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+
+							const media = await denz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
+
+							reply(mess.wait)
+
+								await ffmpeg(`${media}`)
+
+									.inputFormat(media.split('.')[4])
+
+									.on('start', function (cmd) {
+
+										console.log(`Started : ${cmd}`)
+
+									})
+
+									.on('error', function (err) {
+
+										console.log(`Error : ${err}`)
+
+										fs.unlinkSync(media)
+
+										tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+
+										reply(mess.error.api)
+
+									})
+
+									.on('end', function () {
+
+										console.log('Finish')
+
+										exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
+
+											if (error) return reply(mess.error.api)
+
+											denz.sendMessage(from, fs.readFileSync(`./sticker/${sender}.webp`), sticker, {quoted: mek})
+
+											fs.unlinkSync(media)
+
+											fs.unlinkSync(`./sticker/${sender}.webp`)
+
+										})
+
+									})
+
+									.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+
+									.toFormat('webp')
+
+									.save(`./sticker/${sender}.webp`)
+
+						} else {
+
+							reply(`Kirim gambar/video dengan caption ${prefix}sticker atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`)
+
+						}
+
+						break
 					case 'stickerwm':
 					case 'swm':
 						if (isMedia && !mek.message.videoMessage || isQuotedImage) {
