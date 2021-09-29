@@ -1,7 +1,7 @@
 {
-  "name": "dcode-denpa",
-  "version": "0.0.1",
-  "description": "bitch-boot",
+  "name": "kuh x bot",
+  "version": "1.0.0",
+  "description": "KUHXBOT",
   "main": "node index",
   "directories": {
     "lib": "lib"
@@ -17,7 +17,7 @@
     "whatsapp",
     "bot"
   ],
-  "author": "denis-putra",
+  "author": "kukuh",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.2",
@@ -61,10 +61,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dcode-denpa/bitch-boot.git"
+    "url": "git+https://github.com/ramadhankukuh/KUHXBOT-2.git"
   },
   "bugs": {
-    "url": "https://github.com/dcode-denpa/bitch-boot/issues"
+    "url": "https://github.com/ramadhankukuh/KUHXBOT-2/issues"
   },
-  "homepage": "https://github.com/dcode-denpa/bitch-boot#readme"
+  "homepage": "https://github.com/ramadhankukuh/KUHXBOT-2#readme"
 }
