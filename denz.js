@@ -3693,46 +3693,43 @@ break
 						}
 						break
 			case 'play':
-                					if (args.length === 0) return reply(`Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`)
-
-		            var srch = args.join('')
-
-		    		aramas = await yts(srch);
-
-		    		aramat = aramas.all 
-
-		   			var mulaikah = aramat[0].url							
-
-		                  try {
-
-		                    yta(mulaikah)
-
-		                    .then((res) => {
-
-		                        const { dl_link, thumb, title, filesizeF, filesize } = res
-
-		                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-
-		                        .then(async (a) => {
-
-		                        if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Untuk durasi lebih dari batas disajikan dalam mektuk link_`)
-
-		                        const captions = `🎧 *PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-
-		                       await sendMediaURL(from, thumb, captions)
-
-		                        sendMediaURL(from, dl_link).catch(() => reply('error'))
-
-		                        })                
-
-		                        })
-
-		                        } catch (err) {
-
-		                        reply(mess.error.api)
-
-		                        }
-		                   break  
+                            if (args.length === 0) return reply(`Kirim perintah *${prefix}play* _Judul lagu yang akan dicari_`)
+                            const playy = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
+                            const mulaikah = playy.data.result[0].url
+                            try {
+                                reply(mess.wait)
+                                yta(mulaikah)
+                                .then((res) => {
+                                    const { dl_link, thumb, title, filesizeF, filesize } = res
+                                    axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                                    .then(async (a) => {
+                                    if (Number(filesize) >= 30000) return sendMediaURL(from, thumb, `❏ *PLAYmp3*\n\n❏ *Title* : ${title}\n❏ *Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Maaf durasi melebihi batas maksimal, Silahkan klik link diatas_`)
+                                    sendFileFromUrl(dl_link, document, {mimetype: 'audio/mp3', filename: `${title}.mp3`, quoted: mek, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title:title,body:"",mediaType:"2",thumbnail:getBuffer(thumb),mediaUrl:"https://youtu.be/Ejl9sLbgc1A"}}}).catch(() => reply(mess.error.api))
+                                    })
+                                })
+                            } catch (err) {
+                                reply(mess.error.api)
+                            }
+                            break
+                            case 'video':
+                            if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
+                            const playi = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
+                            const mulaihah = playi.data.result[0].url
+                            try {
+                                reply(mess.wait)
+                                ytv(mulaihah)
+                                .then((res) => {
+                                    const { dl_link, thumb, title, filesizeF, filesize } = res
+                                    axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                                    .then(async (a) => {
+                                    if (Number(filesize) >= 30000) return sendMediaURL(from, thumb, `❏ *PLAYmp4*\n\n❏ *Title* : ${title}\n❏ *Ext* : MP4\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_Maaf durasi melebihi batas maksimal, Silahkan klik link diatas_`)
+                                    sendFileFromUrl(dl_link, document, {mimetype: 'video/mp4', filename: `${title}.mp4`, quoted: mek, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title:title,body:"",mediaType:"2",thumbnail:getBuffer(thumb),mediaUrl:"https://youtu.be/Ejl9sLbgc1A"}}}).catch(() => reply(mess.error.api))
+                                    })
+                                })
+                            } catch (err) {
+                                reply(mess.error.api)
+                            }
+                            break
                             case 'video':
                             if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
                             const playi = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
@@ -3763,116 +3760,60 @@ break
 				case 'sticker':
 					case 'stiker':
 					case 's':
-						if (isMedia && !mek.message.videoMessage || isQuotedImage) {
-
 							const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-
 							const media = await denz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-
 							await ffmpeg(`${media}`)
-
 									.input(media)
-
 									.on('start', function (cmd) {
-
 										console.log(`Started : ${cmd}`)
-
 									})
-
 									.on('error', function (err) {
-
 										console.log(`Error : ${err}`)
-
 										fs.unlinkSync(media)
-
 										reply(mess.error.api)
-
 									})
-
 									.on('end', function () {
-
 										console.log('Finish')
-
 										exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-
 											if (error) return reply(mess.error.api)
-
 											denz.sendMessage(from, fs.readFileSync(`./sticker/${sender}.webp`), sticker, {quoted: mek})
-
 											fs.unlinkSync(media)	
-
 											fs.unlinkSync(`./sticker/${sender}.webp`)	
-
 										})
-
 									})
-
 									.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-
 									.toFormat('webp')
-
 									.save(`./sticker/${sender}.webp`)
-
 						} else if ((isMedia && mek.message.videoMessage.fileLength < 10000000 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 10000000)) {
-
 							const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-
 							const media = await denz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
-
 							reply(mess.wait)
-
 								await ffmpeg(`${media}`)
-
 									.inputFormat(media.split('.')[4])
-
 									.on('start', function (cmd) {
-
 										console.log(`Started : ${cmd}`)
-
 									})
-
 									.on('error', function (err) {
-
 										console.log(`Error : ${err}`)
-
 										fs.unlinkSync(media)
-
 										tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-
 										reply(mess.error.api)
-
 									})
-
 									.on('end', function () {
-
 										console.log('Finish')
-
 										exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-
 											if (error) return reply(mess.error.api)
-
 											denz.sendMessage(from, fs.readFileSync(`./sticker/${sender}.webp`), sticker, {quoted: mek})
-
 											fs.unlinkSync(media)
-
 											fs.unlinkSync(`./sticker/${sender}.webp`)
-
 										})
-
 									})
-
 									.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-
 									.toFormat('webp')
-
 									.save(`./sticker/${sender}.webp`)
-
 						} else {
-
 							reply(`Kirim gambar/video dengan caption ${prefix}sticker atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`)
-
 						}
-
 						break
 					case 'stickerwm':
 					case 'swm':
